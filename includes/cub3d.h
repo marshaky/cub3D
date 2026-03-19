@@ -62,15 +62,6 @@
 # define MAP_COLOR_PLDR			0x00FFFF00
 # define MAP_COLOR_RYCT			0x0000FF00
 /* ************************************************************************** */
-/*                             scene colors                                   */
-/* ************************************************************************** */
-# define CEILING_COLOR			0x0087CEEB
-# define FLOOR_COLOR			0x00999999
-# define WALL_NORTH_COLOR		0x00FF9999
-# define WALL_SOUTH_COLOR		0x0099FF99
-# define WALL_EAST_COLOR		0x009999FF
-# define WALL_WEST_COLOR		0x00FFFF99
-/* ************************************************************************** */
 /*                               keycodes Linux                               */
 /* ************************************************************************** */
 # ifdef __linux__
