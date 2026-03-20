@@ -214,6 +214,21 @@ typedef struct s_data
 	t_move	move;
 }	t_data;
 
+typedef struct s_render_ctx
+{
+	t_data			*d;
+	t_wall_column	*col;
+	t_dda			*r;
+	t_tex			*t;
+	int				x;
+	int				*y;
+	// temp values
+	double			wall_x;
+	int				tex_x;
+	double			step;
+	double			tex_pos;
+}	t_render_ctx;
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                               cub3d API                                    */
@@ -288,7 +303,7 @@ void			player_update(t_data *d);
 void			draw_ceiling(t_data *d, int x, int *y, int draw_start);
 void			draw_floor(t_data *d, int x, int y);
 void			draw_flat_wall(t_data *d, int x, int *y, t_wall_column *col);
-void			draw_textured_wall(t_data *d, int x, int *y, t_wall_column *col, t_dda *r, t_tex *t);
+void			draw_textured_wall(t_render_ctx *ctx);
 
 /* ************************************************************************** */
 /*     src/render         render_scene.c                                      */
