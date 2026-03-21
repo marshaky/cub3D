@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:21:39 by marshaky          #+#    #+#             */
-/*   Updated: 2026/03/18 13:21:48 by marshaky         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:55:14 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "error_outputs.h"
 
 int	is_config_line(char *line)
 {
@@ -67,13 +68,13 @@ static int	parse_color(char *line, int *color)
 	while (rgb[i])
 		i++;
 	if (i != 3)
-		return (free_split(rgb), printf("Error\nInvalid color format\n"), ERROR);
+		return (free_split(rgb), printf(COL_ERR), ERROR);
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
 	free_split(rgb);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (printf("Error\nColor values must be 0-255\n"), ERROR);
+		return (printf(COL_VAL_ERR), ERROR);
 	*color = (r << 16) | (g << 8) | b;
 	return (0);
 }
@@ -99,38 +100,35 @@ int	parse_config_line(t_map *map, char *line)
 			return (ERROR);
 	}
 	else
-		return (printf("Error\nDuplicate or invalid config line\n"), ERROR);
+		return (printf(COL_DUB_ERR), ERROR);
 	return (0);
 }
 
 int	add_map_line(t_map *map, char *line)
 {
-	char	**new_grid;
-	int		i;
-	int		len;
-	char	*trimmed;
+	t_add_map_line_tmp	tmp;
 
-	trimmed = ft_strtrim(line, "\n");
-	if (!trimmed)
+	tmp.trimmed = ft_strtrim(line, "\n");
+	if (!tmp.trimmed)
 		return (ERROR);
-	len = 0;
-	while (map->grid && map->grid[len])
-		len++;
-	new_grid = malloc(sizeof(char *) * (len + 2));
-	if (!new_grid)
-		return (free(trimmed), ERROR);
-	i = 0;
-	while (i < len)
+	tmp.len = 0;
+	while (map->grid && map->grid[tmp.len])
+		tmp.len++;
+	tmp.new_grid = malloc(sizeof(char *) * (tmp.len + 2));
+	if (!tmp.new_grid)
+		return (free(tmp.trimmed), ERROR);
+	tmp.i = 0;
+	while (tmp.i < tmp.len)
 	{
-		new_grid[i] = map->grid[i];
+		tmp.new_grid[tmp.i] = map->grid[i];
 		i++;
 	}
-	new_grid[i] = trimmed;
-	new_grid[i + 1] = NULL;
+	tmp.new_grid[tmp.i] = tmp.trimmed;
+	tmp.new_grid[tmp.i + 1] = NULL;
 	free(map->grid);
-	map->grid = new_grid;
-	if ((int)ft_strlen(trimmed) > map->width)
-		map->width = ft_strlen(trimmed);
-	map->height = len + 1;
+	map->grid = tmp.new_grid;
+	if ((int)ft_strlen(tmp.trimmed) > map->width)
+		map->width = ft_strlen(tmp.trimmed);
+	map->height = tmp.len + 1;
 	return (0);
 }

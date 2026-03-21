@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:20:32 by marshaky          #+#    #+#             */
-/*   Updated: 2026/03/21 10:43:32 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:46:59 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	parse_cub_file(t_map *map, char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (printf("Error\nCannot open file: %s\n", filename), ERROR);
+		return (printf(OPEN_FILE_ERR, filename), ERROR);
 	config_count = 0;
 	map_started = 0;
 	line = get_next_line(fd);
@@ -108,9 +108,9 @@ int	parse_cub_file(t_map *map, char *filename)
 	}
 	close(fd);
 	if (config_count != 6)
-		return (printf("Error\nInvalid config (need NO,SO,WE,EA,F,C)\n"), ERROR);
+		return (printf(CONFIG_ERR), ERROR);
 	if (!map->grid)
-		return (printf("Error\nNo map found in file\n"), ERROR);
+		return (printf(MAP_FIND_ERR), ERROR);
 	if (validate_map(map) != 0)
 		return (ERROR);
 	if (parse_player_position(map) != 0)

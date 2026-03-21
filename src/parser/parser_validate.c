@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_validate.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:22:01 by marshaky          #+#    #+#             */
-/*   Updated: 2026/03/18 13:44:44 by marshaky         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:44:49 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static int	is_valid_char(char c)
 {
-	return (c == '0' || c == '1' || c == ' ' 
+	return (c == '0' || c == '1' || c == ' '
 		|| c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
 static int	check_walls_around(t_map *map, int y, int x)
 {
-	if (y == 0 || y == map->height - 1 || x == 0 
+	if (y == 0 || y == map->height - 1 || x == 0
 		|| x == (int)ft_strlen(map->grid[y]) - 1)
 	{
 		if (map->grid[y][x] == '0' || is_spawn_char(map->grid[y][x]))

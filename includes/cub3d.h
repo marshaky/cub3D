@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:14:38 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/21 10:40:48 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:54:02 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,14 @@ typedef struct s_parse_player_pos
 	int				y;
 	int				player_count;
 }	t_parse_player_pos;
+
+typedef struct s_add_map_line_tmp
+{
+	int				i;
+	int				len;
+	char			*trimmed;
+	char			**new_grid;
+}	t_add_map_line_tmp;
 
 /* ************************************************************************** */
 /*                                                                            */
