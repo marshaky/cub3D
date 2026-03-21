@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:14:38 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/21 10:18:30 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:40:48 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,13 @@ typedef struct s_render_ctx
 	double			step;
 	double			tex_pos;
 }	t_render_ctx;
+
+typedef struct s_parse_player_pos
+{
+	int				x;
+	int				y;
+	int				player_count;
+}	t_parse_player_pos;
 
 /* ************************************************************************** */
 /*                                                                            */

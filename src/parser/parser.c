@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:20:32 by marshaky          #+#    #+#             */
-/*   Updated: 2026/03/18 13:45:05 by marshaky         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:43:32 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "error_outputs.h"
 
 int	is_spawn_char(char c)
 {
@@ -43,32 +44,30 @@ static void	set_player_dir(t_map *map, char spawn)
 
 static int	parse_player_position(t_map *map)
 {
-	int	x;
-	int	y;
-	int	player_count;
+	t_parse_player_pos	ppos;
 
-	player_count = 0;
-	y = 0;
-	while (map->grid[y])
+	ppos.player_count = 0;
+	ppos.y = 0;
+	while (map->grid[ppos.y])
 	{
-		x = 0;
-		while (map->grid[y][x])
+		ppos.x = 0;
+		while (map->grid[ppos.y][ppos.x])
 		{
-			if (is_spawn_char(map->grid[y][x]))
+			if (is_spawn_char(map->grid[ppos.y][ppos.x]))
 			{
-				if (player_count > 0)
-					return (printf("Error\nMultiple player positions\n"), ERROR);
-				map->player_x = x + 0.5;
-				map->player_y = y + 0.5;
+				if (ppos.player_count > 0)
+					return (printf(MUL_PLAYER_POS), ERROR);
+				map->player_x = ppos.x + 0.5;
+				map->player_y = ppos.y + 0.5;
 				set_player_dir(map, map->grid[y][x]);
-				player_count++;
+				ppos.player_count++;
 			}
-			x++;
+			ppos.x++;
 		}
-		y++;
+		ppos.y++;
 	}
-	if (player_count == 0)
-		return (printf("Error\nNo player position found\n"), ERROR);
+	if (ppos.player_count == 0)
+		return (printf(NO_PLAYER_POS), ERROR);
 	return (0);
 }
 
@@ -82,7 +81,6 @@ int	parse_cub_file(t_map *map, char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (printf("Error\nCannot open file: %s\n", filename), ERROR);
-	
 	config_count = 0;
 	map_started = 0;
 	line = get_next_line(fd);
@@ -109,7 +107,6 @@ int	parse_cub_file(t_map *map, char *filename)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	
 	if (config_count != 6)
 		return (printf("Error\nInvalid config (need NO,SO,WE,EA,F,C)\n"), ERROR);
 	if (!map->grid)

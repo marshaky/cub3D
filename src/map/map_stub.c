@@ -6,40 +6,11 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:13:47 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/02 19:58:42 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:26:56 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int	is_spawn_char(char c)
-{
-	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
-}
-
-static void	set_player_dir(t_map *map, char spawn)
-{
-	if (spawn == 'N')
-	{
-		map->dir_x = 0.0;
-		map->dir_y = -1.0;
-	}
-	else if (spawn == 'S')
-	{
-		map->dir_x = 0.0;
-		map->dir_y = 1.0;
-	}
-	else if (spawn == 'E')
-	{
-		map->dir_x = 1.0;
-		map->dir_y = 0.0;
-	}
-	else
-	{
-		map->dir_x = -1.0;
-		map->dir_y = 0.0;
-	}
-}
 
 int	map_load_stub(t_map *map)
 {
