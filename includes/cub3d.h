@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:14:38 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/18 13:34:00 by marshaky         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:15:55 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,34 +62,43 @@
 # define MAP_COLOR_PLDR			0x00FFFF00
 # define MAP_COLOR_RYCT			0x0000FF00
 /* ************************************************************************** */
+/*                             scene colors                                   */
+/* ************************************************************************** */
+# define CEILING_COLOR			0x0087CEEB
+# define FLOOR_COLOR			0x00999999
+# define WALL_NORTH_COLOR		0x00FF9999
+# define WALL_SOUTH_COLOR		0x0099FF99
+# define WALL_EAST_COLOR		0x009999FF
+# define WALL_WEST_COLOR		0x00FFFF99
+/* ************************************************************************** */
 /*                               keycodes Linux                               */
 /* ************************************************************************** */
 # ifdef __linux__
-# define KEY_ESC				65307
-# define EV_KEYDOWN				2
-# define EV_KEYUP				3
-# define EV_DESTROY				17
-# define KEY_A					97
-# define KEY_D					100
-# define KEY_W					119
-# define KEY_S					115
-# define KEY_AR_L				65361
-# define KEY_AR_R				65363
-# define KEY_AR_T				65362
-# define KEY_AR_B				65364
+#  define KEY_ESC				65307
+#  define EV_KEYDOWN			2
+#  define EV_KEYUP				3
+#  define EV_DESTROY			17
+#  define KEY_A					97
+#  define KEY_D					100
+#  define KEY_W					119
+#  define KEY_S					115
+#  define KEY_AR_L				65361
+#  define KEY_AR_R				65363
+#  define KEY_AR_T				65362
+#  define KEY_AR_B				65364
 # else
-# define KEY_ESC				53
-# define EV_KEYDOWN				2
-# define EV_KEYUP				3
-# define EV_DESTROY				17
-# define KEY_A					0
-# define KEY_D					2
-# define KEY_W					13
-# define KEY_S					1
-# define KEY_AR_L				123
-# define KEY_AR_R				124
-# define KEY_AR_T				126
-# define KEY_AR_B				125
+#  define KEY_ESC				53
+#  define EV_KEYDOWN			2
+#  define EV_KEYUP				3
+#  define EV_DESTROY			17
+#  define KEY_A					0
+#  define KEY_D					2
+#  define KEY_W					13
+#  define KEY_S					1
+#  define KEY_AR_L				123
+#  define KEY_AR_R				124
+#  define KEY_AR_T				126
+#  define KEY_AR_B				125
 # endif
 /* ************************************************************************** */
 /*                               structures                                   */
@@ -225,6 +234,8 @@ typedef struct s_render_ctx
 	// temp values
 	double			wall_x;
 	int				tex_x;
+	int				tex_y;
+	int				color;
 	double			step;
 	double			tex_pos;
 }	t_render_ctx;

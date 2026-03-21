@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 19:41:43 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/17 20:34:30 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:14:04 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	draw_textured_wall(t_render_ctx *ctx)
 			+ ctx->col->line_height / 2.0) * ctx->step;
 	while (*(ctx->y) <= ctx->col->draw_end)
 	{
-		tex_y = (int)ctx->tex_pos;
-		color = texel_at(ctx->t, ctx->tex_x, tex_y);
-		ft_put_pixel(&ctx->d->img, ctx->x, (*(ctx->y))++, (int)color);
+		ctx->tex_y = (int)ctx->tex_pos;
+		ctx->color = texel_at(ctx->t, ctx->tex_x, ctx->tex_y);
+		ft_put_pixel(&ctx->d->img, ctx->x, (*(ctx->y))++, (int)ctx->color);
 		ctx->tex_pos += ctx->step;
 	}
 }
