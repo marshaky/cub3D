@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 10:31:20 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/21 10:51:53 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:58:19 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,11 @@
 # define COL_ERR			"Error\nInvalid color format\n"
 # define COL_VAL_ERR		"Error\nColor values must be 0-255\n"
 # define COL_DUB_ERR		"Error\nDuplicate or invalid config line\n"
+
+/* ************************************************************************** */
+/*     src/parser            parser_validate.c                                */
+/* ************************************************************************** */
+# define MAP_CHR_ERR		"Error\nInvalid character in map\n"
+# define MAP_WALL_ERR		"Error\nMap not closed by walls at [%d,%d]\n"
+
 #endif

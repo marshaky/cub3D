@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:21:39 by marshaky          #+#    #+#             */
-/*   Updated: 2026/03/21 10:55:14 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:56:55 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@ int	add_map_line(t_map *map, char *line)
 	tmp.i = 0;
 	while (tmp.i < tmp.len)
 	{
-		tmp.new_grid[tmp.i] = map->grid[i];
-		i++;
+		tmp.new_grid[tmp.i] = map->grid[tmp.i];
+		tmp.i++;
 	}
 	tmp.new_grid[tmp.i] = tmp.trimmed;
 	tmp.new_grid[tmp.i + 1] = NULL;

@@ -6,11 +6,12 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:22:01 by marshaky          #+#    #+#             */
-/*   Updated: 2026/03/21 10:44:49 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:58:56 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "error_outputs.h"
 
 static int	is_valid_char(char c)
 {
@@ -58,9 +59,9 @@ int	validate_map(t_map *map)
 		while (map->grid[y][x])
 		{
 			if (!is_valid_char(map->grid[y][x]))
-				return (printf("Error\nInvalid character in map\n"), ERROR);
+				return (printf(MAP_CHR_ERR), ERROR);
 			if (check_walls_around(map, y, x) != 0)
-				return (printf("Error\nMap not closed by walls at [%d,%d]\n", y, x), ERROR);
+				return (printf(MAP_WALL_ERR, y, x), ERROR);
 			x++;
 		}
 		y++;
@@ -73,7 +74,7 @@ void	free_split(char **arr)
 	int	i;
 
 	if (!arr)
-		return;
+		return ;
 	i = 0;
 	while (arr[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:20:32 by marshaky          #+#    #+#             */
-/*   Updated: 2026/03/21 10:46:59 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:56:27 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,29 @@ static void	set_player_dir(t_map *map, char spawn)
 
 static int	parse_player_position(t_map *map)
 {
-	t_parse_player_pos	ppos;
+	t_parse_player_pos	tmp;
 
-	ppos.player_count = 0;
-	ppos.y = 0;
-	while (map->grid[ppos.y])
+	tmp.player_count = 0;
+	tmp.y = 0;
+	while (map->grid[tmp.y])
 	{
-		ppos.x = 0;
-		while (map->grid[ppos.y][ppos.x])
+		tmp.x = 0;
+		while (map->grid[tmp.y][tmp.x])
 		{
-			if (is_spawn_char(map->grid[ppos.y][ppos.x]))
+			if (is_spawn_char(map->grid[tmp.y][tmp.x]))
 			{
-				if (ppos.player_count > 0)
+				if (tmp.player_count > 0)
 					return (printf(MUL_PLAYER_POS), ERROR);
-				map->player_x = ppos.x + 0.5;
-				map->player_y = ppos.y + 0.5;
-				set_player_dir(map, map->grid[y][x]);
-				ppos.player_count++;
+				map->player_x = tmp.x + 0.5;
+				map->player_y = tmp.y + 0.5;
+				set_player_dir(map, map->grid[tmp.y][tmp.x]);
+				tmp.player_count++;
 			}
-			ppos.x++;
+			tmp.x++;
 		}
-		ppos.y++;
+		tmp.y++;
 	}
-	if (ppos.player_count == 0)
+	if (tmp.player_count == 0)
 		return (printf(NO_PLAYER_POS), ERROR);
 	return (0);
 }
