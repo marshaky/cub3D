@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:13:47 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/12 19:40:09 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/21 11:44:59 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	render_frame(void *param)
 	d = (t_data *)param;
 	player_update(d);
 	render_scene(d);
-	draw_minimap(d);
 	mlx_put_image_to_window(d->mlx.mlx, d->mlx.win, d->img.img, 0, 0);
 	return (0);
 }

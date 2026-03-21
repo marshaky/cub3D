@@ -14,7 +14,8 @@
 
 /**
  * Loads all wall textures for the game.
- * Attempts to load each texture (north, south, west, east) using the provided paths.
+ * Attempts to load each texture (north, south, west, east) using the provided 
+ * paths.
  * Returns ERROR if any texture fails to load.
  *
  * @param d Pointer to the main data structure (t_data).
