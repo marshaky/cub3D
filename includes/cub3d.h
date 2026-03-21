@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:14:38 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/21 11:45:56 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/21 11:56:33 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define WINDOW_WIDTH			1280
 # define WINDOW_HEIGHT			720
 # define RAY_STEP				0.02
-# define RAY_MAX_DIST			20.0
+# define RAY_MAX_DIST			200.0
 # define PI						3.14159265358979323846
 # define DEG_TO_RAD				0.017453292519943295
 # define SCENE_FOV				66.0
