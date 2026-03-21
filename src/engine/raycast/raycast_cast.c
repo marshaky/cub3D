@@ -5,13 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/28 16:13:47 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/04 14:12:21 by aramarak         ###   ########.fr       */
+/*   Created: 2026/03/21 11:07:48 by aramarak          #+#    #+#             */
+/*   Updated: 2026/03/21 11:07:48 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * Checks if the cell at (mx, my) is a wall.
+ * Returns 1 if the coordinates are out of bounds or if the cell is a wall,
+ * 0 otherwise.
+ *
+ * @param m  Pointer to the map structure.
+ * @param mx X coordinate in the map grid.
+ * @param my Y coordinate in the map grid.
+ * @return   1 if wall or out of bounds, 0 otherwise.
+ */
 static int	is_wall_cell(t_map *m, int mx, int my)
 {
 	if (mx < 0 || my < 0 || my >= m->height || mx >= m->width)
@@ -19,6 +29,15 @@ static int	is_wall_cell(t_map *m, int mx, int my)
 	return (m->grid[my][mx] == ICN_WALL);
 }
 
+/**
+ * Performs the DDA (Digital Differential Analyzer) algorithm to cast a ray.
+ * Advances the ray step by step until it hits a wall or reaches the maximum 
+ * distance.
+ *
+ * @param d Pointer to the main data structure containing the map.
+ * @param r Pointer to the DDA ray structure (holds ray state and result).
+ * @return  void
+ */
 void	cast_dda(t_data *d, t_dda *r)
 {
 	while (r->dist < RAY_MAX_DIST)
