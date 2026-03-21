@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+/**
+ * Initializes the camera plane for the player based on their direction.
+ * Calculates the camera plane vector (perpendicular to the direction vector)
+ * using the field of view (FOV).
+ *
+ * @param map Pointer to the map structure containing player direction and plane.
+ * @return    void
+ */
 void	camera_init(t_map *map)
 {
 	double	plane_len;
@@ -21,6 +29,14 @@ void	camera_init(t_map *map)
 	map->plane_y = map->dir_x * plane_len;
 }
 
+/**
+ * Initializes the application window, image buffer, and camera plane.
+ * Sets up the MLX window, image, and retrieves the image data address.
+ * Returns ERROR if any initialization step fails.
+ *
+ * @param d Pointer to the main data structure (t_data).
+ * @return  0 on success, ERROR on failure.
+ */
 int	app_init(t_data *d)
 {
 	d->mlx.w = WINDOW_WIDTH;

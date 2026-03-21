@@ -6,12 +6,22 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:13:47 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/04 14:18:46 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/21 11:19:07 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * Handles key press events and updates movement flags in the main data 
+ * structure.
+ * Sets the corresponding movement or rotation flag to 1 when a key is pressed.
+ * Exits the program if ESC is pressed.
+ *
+ * @param keycode The code of the pressed key.
+ * @param param   Pointer to the main data structure (t_data).
+ * @return        Always returns 0.
+ */
 int	on_keydown(int keycode, void *param)
 {
 	t_data	*d;
@@ -34,6 +44,15 @@ int	on_keydown(int keycode, void *param)
 	return (0);
 }
 
+/**
+ * Handles key release events and updates movement flags in the main data 
+ * structure.
+ * Sets the corresponding movement or rotation flag to 0 when a key is released.
+ *
+ * @param keycode The code of the released key.
+ * @param param   Pointer to the main data structure (t_data).
+ * @return        Always returns 0.
+ */
 int	on_keyup(int keycode, void *param)
 {
 	t_data	*d;
@@ -54,6 +73,13 @@ int	on_keyup(int keycode, void *param)
 	return (0);
 }
 
+/**
+ * Handles the window destroy event (e.g., when the user closes the window).
+ * Cleans up resources and exits the program.
+ *
+ * @param param Pointer to the main data structure (t_data).
+ * @return      Always returns the result of clean_exit (typically 0).
+ */
 int	on_destroy(void *param)
 {
 	t_data	*d;
