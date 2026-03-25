@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:20:32 by marshaky          #+#    #+#             */
-/*   Updated: 2026/03/21 10:56:27 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/25 20:12:35 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,15 @@ int	parse_cub_file(t_map *map, char *filename)
 		}
 		else if (map_started && line[0] == '\n')
 		{
-			// Empty line after map started - might be end of file
-			// Check if next line is also empty or EOF
+			// FIXME: put actual comments afterm map
+			printf("My dubby error");
+			return (free(line), close(fd), ERROR);
+		}
+		else
+		{
+			// FIXME: put actual comments invalid character
+			printf(CONFIG_ERR);
+			return (free(line), close(fd), ERROR);
 		}
 		free(line);
 		line = get_next_line(fd);

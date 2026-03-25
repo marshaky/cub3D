@@ -44,7 +44,6 @@ void	draw_wall_column(t_data *d, int x, t_dda *r)
 
 	if (r->dist < 0.0001)
 		r->dist = 0.0001;
-	printf("%f\n", r->dist);
 	col.line_height = (int)(WINDOW_HEIGHT / r->dist);
 	col.draw_start = -col.line_height / 2 + WINDOW_HEIGHT / 2;
 	col.draw_end = col.line_height / 2 + WINDOW_HEIGHT / 2;
