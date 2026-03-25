@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:14:38 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/18 13:34:00 by marshaky         ###   ########.fr       */
+/*   Updated: 2026/03/21 11:56:33 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define WINDOW_WIDTH			1280
 # define WINDOW_HEIGHT			720
 # define RAY_STEP				0.02
-# define RAY_MAX_DIST			20.0
+# define RAY_MAX_DIST			200.0
 # define PI						3.14159265358979323846
 # define DEG_TO_RAD				0.017453292519943295
 # define SCENE_FOV				66.0
@@ -74,39 +74,32 @@
 /*                               keycodes Linux                               */
 /* ************************************************************************** */
 # ifdef __linux__
-# define KEY_ESC				65307
-# define EV_KEYDOWN				2
-# define EV_KEYUP				3
-# define EV_DESTROY				17
-# define KEY_A					97
-# define KEY_D					100
-# define KEY_W					119
-# define KEY_S					115
-# define KEY_AR_L				65361
-# define KEY_AR_R				65363
-# define KEY_AR_T				65362
-# define KEY_AR_B				65364
+#  define KEY_ESC				65307
+#  define EV_KEYDOWN			2
+#  define EV_KEYUP				3
+#  define EV_DESTROY			17
+#  define KEY_A					97
+#  define KEY_D					100
+#  define KEY_W					119
+#  define KEY_S					115
+#  define KEY_AR_L				65361
+#  define KEY_AR_R				65363
+#  define KEY_AR_T				65362
+#  define KEY_AR_B				65364
 # else
-# define KEY_ESC				53
-# define EV_KEYDOWN				2
-# define EV_KEYUP				3
-# define EV_DESTROY				17
-# define KEY_A					0
-# define KEY_D					2
-# define KEY_W					13
-# define KEY_S					1
-# define KEY_AR_L				123
-# define KEY_AR_R				124
-# define KEY_AR_T				126
-# define KEY_AR_B				125
+#  define KEY_ESC				53
+#  define EV_KEYDOWN			2
+#  define EV_KEYUP				3
+#  define EV_DESTROY			17
+#  define KEY_A					0
+#  define KEY_D					2
+#  define KEY_W					13
+#  define KEY_S					1
+#  define KEY_AR_L				123
+#  define KEY_AR_R				124
+#  define KEY_AR_T				126
+#  define KEY_AR_B				125
 # endif
-/* ************************************************************************** */
-/*                               map types                                    */
-/* ************************************************************************** */
-# define ICN_WALL				'1'
-# define ICN_GROUND				'0'
-# define ICN_PLAYER				'N'
-// Note: Also handle 'S', 'E', 'W' as player spawn chars
 /* ************************************************************************** */
 /*                               structures                                   */
 /* ************************************************************************** */
@@ -230,6 +223,38 @@ typedef struct s_data
 	t_move	move;
 }	t_data;
 
+typedef struct s_render_ctx
+{
+	t_data			*d;
+	t_wall_column	*col;
+	t_dda			*r;
+	t_tex			*t;
+	int				x;
+	int				*y;
+	// temp values
+	double			wall_x;
+	int				tex_x;
+	int				tex_y;
+	int				color;
+	double			step;
+	double			tex_pos;
+}	t_render_ctx;
+
+typedef struct s_parse_player_pos
+{
+	int				x;
+	int				y;
+	int				player_count;
+}	t_parse_player_pos;
+
+typedef struct s_add_map_line_tmp
+{
+	int				i;
+	int				len;
+	char			*trimmed;
+	char			**new_grid;
+}	t_add_map_line_tmp;
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                               cub3d API                                    */
@@ -275,11 +300,6 @@ int				load_texture(t_data *d, t_tex *tex, char *path);
 /* ************************************************************************** */
 int				is_wall(t_map *m, double x, double y);
 
-// /* ************************************************************************** */
-// /*     src/map                  map_stub.c                                    */
-// /* ************************************************************************** */
-// int				map_load_stub(t_map *map);
-
 /* ************************************************************************** */
 /*     src/player            player_move.c                                    */
 /* ************************************************************************** */
@@ -304,7 +324,7 @@ void			player_update(t_data *d);
 void			draw_ceiling(t_data *d, int x, int *y, int draw_start);
 void			draw_floor(t_data *d, int x, int y);
 void			draw_flat_wall(t_data *d, int x, int *y, t_wall_column *col);
-void			draw_textured_wall(t_data *d, int x, int *y, t_wall_column *col, t_dda *r, t_tex *t);
+void			draw_textured_wall(t_render_ctx *ctx);
 
 /* ************************************************************************** */
 /*     src/render         render_scene.c                                      */
@@ -381,6 +401,5 @@ void			free_split(char **arr);
 /*     src/parser            parser_validate.c                                */
 /* ************************************************************************** */
 int				validate_map(t_map *map);
-
 
 #endif	//CUB3D_H

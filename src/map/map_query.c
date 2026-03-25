@@ -12,6 +12,16 @@
 
 #include "cub3d.h"
 
+/**
+ * Checks if the given (x, y) position is inside a wall or out of bounds.
+ * Converts floating-point coordinates to integer grid indices and checks
+ * the map cell.
+ *
+ * @param m Pointer to the map structure.
+ * @param x X coordinate (double).
+ * @param y Y coordinate (double).
+ * @return  1 if wall or out of bounds, 0 otherwise.
+ */
 int	is_wall(t_map *m, double x, double y)
 {
 	int	mx;

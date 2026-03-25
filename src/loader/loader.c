@@ -12,6 +12,15 @@
 
 #include "cub3d.h"
 
+/**
+ * Loads all wall textures for the game.
+ * Attempts to load each texture (north, south, west, east) using the provided 
+ * paths.
+ * Returns ERROR if any texture fails to load.
+ *
+ * @param d Pointer to the main data structure (t_data).
+ * @return  0 on success, ERROR on failure.
+ */
 int	load_textures(t_data *d)
 {
 	if (load_texture(d, &d->tex[TEX_NO], d->map.tex_path_no))
@@ -25,6 +34,16 @@ int	load_textures(t_data *d)
 	return (0);
 }
 
+/**
+ * Loads a single texture from an XPM file using the given path.
+ * Initializes the texture's image, dimensions, and data address.
+ * Returns ERROR if loading fails at any step.
+ *
+ * @param d    Pointer to the main data structure (t_data).
+ * @param tex  Pointer to the texture structure to initialize.
+ * @param path Path to the XPM texture file.
+ * @return     0 on success, ERROR on failure.
+ */
 int	load_texture(t_data *d, t_tex *tex, char *path)
 {
 	tex->img = mlx_xpm_file_to_image(d->mlx.mlx, path,

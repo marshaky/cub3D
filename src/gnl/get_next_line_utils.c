@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 23:58:51 by marshaky          #+#    #+#             */
-/*   Updated: 2026/03/14 13:46:53 by marshaky         ###   ########.fr       */
+/*   Updated: 2026/03/21 11:17:46 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 		return (ft_strdup_gnl(s2));
 	if (!s2)
 		return (ft_strdup_gnl(s1));
-	res = (char *)malloc(sizeof(char) * (ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1));
+	res = (char *)malloc(sizeof(char) * (ft_strlen_gnl(s1)
+				+ ft_strlen_gnl(s2) + 1));
 	if (!res)
 	{
 		free(s1);

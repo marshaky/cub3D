@@ -44,6 +44,7 @@ void	draw_wall_column(t_data *d, int x, t_dda *r)
 
 	if (r->dist < 0.0001)
 		r->dist = 0.0001;
+	printf("%f\n", r->dist);
 	col.line_height = (int)(WINDOW_HEIGHT / r->dist);
 	col.draw_start = -col.line_height / 2 + WINDOW_HEIGHT / 2;
 	col.draw_end = col.line_height / 2 + WINDOW_HEIGHT / 2;
@@ -78,6 +79,7 @@ void	draw_column_pixels(t_data *d, int x, t_wall_column *col, t_dda *r)
 	int				y;
 	int				tex_id;
 	t_tex			*t;
+	t_render_ctx	ctx;
 
 	y = 0;
 	tex_id = pick_tex_id(r);
@@ -90,7 +92,13 @@ void	draw_column_pixels(t_data *d, int x, t_wall_column *col, t_dda *r)
 	}
 	else
 	{
-		draw_textured_wall(d, x, &y, col, r, t);
+		ctx.d = d;
+		ctx.col = col;
+		ctx.r = r;
+		ctx.t = t;
+		ctx.x = x;
+		ctx.y = &y;
+		draw_textured_wall(&ctx);
 	}
 	draw_floor(d, x, y);
 }

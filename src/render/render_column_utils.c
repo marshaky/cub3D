@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 19:41:43 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/17 20:34:30 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/21 11:49:24 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,24 @@ void	draw_flat_wall(t_data *d, int x, int *y, t_wall_column *col)
 		ft_put_pixel(&d->img, x, (*y)++, col->color);
 }
 
-void	draw_textured_wall(t_data *d, int x, int *y, t_wall_column *col, t_dda *r, t_tex *t)
+void	draw_textured_wall(t_render_ctx *ctx)
 {
-	double			wall_x;
-	int				tex_x;
-	double			step;
-	double			tex_pos;
-	unsigned int	color;
-	int				tex_y;
-
-	wall_x = compute_wall_x(r);
-	tex_x = (int)(wall_x * (double)t->width);
-	if (r->side == 0 && r->dir_x < 0)
-		tex_x = t->width - tex_x - 1;
-	if (r->side == 1 && r->dir_y > 0)
-		tex_x = t->width - tex_x - 1;
-	if (col->line_height <= 0)
-		col->line_height = 1;
-	step = (double)t->height / (double)col->line_height;
-	tex_pos = (col->draw_start - WINDOW_HEIGHT / 2
-			+ col->line_height / 2.0) * step;
-	while (*y <= col->draw_end)
+	ctx->wall_x = compute_wall_x(ctx->r);
+	ctx->tex_x = (int)(ctx->wall_x * (double)ctx->t->width);
+	if (ctx->r->side == 0 && ctx->r->dir_x < 0)
+		ctx->tex_x = ctx->t->width - ctx->tex_x - 1;
+	if (ctx->r->side == 1 && ctx->r->dir_y > 0)
+		ctx->tex_x = ctx->t->width - ctx->tex_x - 1;
+	if (ctx->col->line_height <= 0)
+		ctx->col->line_height = 1;
+	ctx->step = (double)ctx->t->height / (double)ctx->col->line_height;
+	ctx->tex_pos = (ctx->col->draw_start - WINDOW_HEIGHT / 2
+			+ ctx->col->line_height / 2.0) * ctx->step;
+	while (*(ctx->y) <= ctx->col->draw_end)
 	{
-		tex_y = (int)tex_pos;
-		color = texel_at(t, tex_x, tex_y);
-		ft_put_pixel(&d->img, x, (*y)++, (int)color);
-		tex_pos += step;
+		ctx->tex_y = (int)ctx->tex_pos;
+		ctx->color = texel_at(ctx->t, ctx->tex_x, ctx->tex_y);
+		ft_put_pixel(&ctx->d->img, ctx->x, (*(ctx->y))++, (int)ctx->color);
+		ctx->tex_pos += ctx->step;
 	}
 }
