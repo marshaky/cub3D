@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_outputs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 10:31:20 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/21 10:58:19 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/29 14:45:46 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define OPEN_FILE_ERR		"Error\nCannot open file: %s\n"
 # define CONFIG_ERR			"Error\nInvalid config (need NO,SO,WE,EA,F,C)\n"
 # define MAP_FIND_ERR		"Error\nNo map found in file\n"
+# define MAP_EMPTY_LINE_ERR	"Error\nEmpty line in/after map block\n"
 
 /* ************************************************************************** */
 /*     src/parser            parser_utils.c                                   */

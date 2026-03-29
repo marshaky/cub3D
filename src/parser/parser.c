@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:20:32 by marshaky          #+#    #+#             */
-/*   Updated: 2026/03/25 20:12:35 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/03/29 14:47:11 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,22 @@
 int	is_spawn_char(char c)
 {
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
+static int	is_blank_line(char *line)
+{
+	int	i;
+
+	if (!line)
+		return (1);
+	i = 0;
+	while (line[i] && line[i] != '\n')
+	{
+		if (line[i] != ' ' && line[i] != '\t')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 static void	set_player_dir(t_map *map, char spawn)
@@ -71,49 +87,61 @@ static int	parse_player_position(t_map *map)
 	return (0);
 }
 
-int	parse_cub_file(t_map *map, char *filename)
+static int	parse_before_map(t_map *map, char *line,
+		int *config_count, int *map_started)
 {
-	int		fd;
-	char	*line;
-	int		config_count;
-	int		map_started;
+	if (is_blank_line(line))
+		return (0);
+	if (is_config_line(line))
+	{
+		if (parse_config_line(map, line) != 0)
+			return (ERROR);
+		(*config_count)++;
+		return (0);
+	}
+	if (is_map_line(line))
+	{
+		*map_started = 1;
+		if (add_map_line(map, line) != 0)
+			return (ERROR);
+		return (0);
+	}
+	return (printf(CONFIG_ERR), ERROR);
+}
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (printf(OPEN_FILE_ERR, filename), ERROR);
-	config_count = 0;
+static int	parse_after_map(t_map *map, char *line)
+{
+	if (is_map_line(line))
+		return (add_map_line(map, line));
+	if (is_blank_line(line))
+		return (printf(MAP_EMPTY_LINE_ERR), ERROR);
+	return (printf(MAP_CHR_ERR), ERROR);
+}
+
+static int	read_cub_lines(int fd, t_map *map, int *config_count)
+{
+	char	*line;
+	int		map_started;
+	int		status;
+
 	map_started = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!map_started && is_config_line(line))
-		{
-			if (parse_config_line(map, line) != 0)
-				return (free(line), close(fd), ERROR);
-			config_count++;
-		}
-		else if (is_map_line(line))
-		{
-			map_started = 1;
-			if (add_map_line(map, line) != 0)
-				return (free(line), close(fd), ERROR);
-		}
-		else if (map_started && line[0] == '\n')
-		{
-			// FIXME: put actual comments afterm map
-			printf("My dubby error");
-			return (free(line), close(fd), ERROR);
-		}
+		if (!map_started)
+			status = parse_before_map(map, line, config_count, &map_started);
 		else
-		{
-			// FIXME: put actual comments invalid character
-			printf(CONFIG_ERR);
-			return (free(line), close(fd), ERROR);
-		}
+			status = parse_after_map(map, line);
 		free(line);
+		if (status != 0)
+			return (ERROR);
 		line = get_next_line(fd);
 	}
-	close(fd);
+	return (0);
+}
+
+static int	finalize_parse(t_map *map, int config_count)
+{
 	if (config_count != 6)
 		return (printf(CONFIG_ERR), ERROR);
 	if (!map->grid)
@@ -123,4 +151,19 @@ int	parse_cub_file(t_map *map, char *filename)
 	if (parse_player_position(map) != 0)
 		return (ERROR);
 	return (0);
+}
+
+int	parse_cub_file(t_map *map, char *filename)
+{
+	int	fd;
+	int	config_count;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (printf(OPEN_FILE_ERR, filename), ERROR);
+	config_count = 0;
+	if (read_cub_lines(fd, map, &config_count) != 0)
+		return (close(fd), ERROR);
+	close(fd);
+	return (finalize_parse(map, config_count));
 }
