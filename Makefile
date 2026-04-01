@@ -31,6 +31,8 @@ SRC = \
 	$(INIT_DIR)/init.c \
 	$(LOADER_DIR)/loader.c \
 	$(PARSER_DIR)/parser.c \
+	$(PARSER_DIR)/parser_checkers.c \
+	$(PARSER_DIR)/parser_player.c \
 	$(PARSER_DIR)/parser_utils.c \
 	$(PARSER_DIR)/parser_validate.c \
 	$(MAP_DIR)/map_query.c \
@@ -71,7 +73,7 @@ else
 	MLX_FLAGS   =	-L $(MINILIBX) -framework OpenGL -framework AppKit -lmlx -lm
 endif
 
-%.o: %.c
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
 $(OBJS_DIR)/%.o: $(SRC_DIR)/%.c
