@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:22:01 by marshaky          #+#    #+#             */
-/*   Updated: 2026/03/25 20:10:16 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/04/01 19:30:13 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	validate_map(t_map *map)
 		x = 0;
 		while (map->grid[y][x])
 		{
-			// FIXME: FIX issue 
 			if (!is_valid_char(map->grid[y][x]))
 				return (printf(MAP_CHR_ERR), ERROR);
 			if (check_walls_around(map, y, x) != 0)
