@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:13:47 by aramarak          #+#    #+#             */
-/*   Updated: 2026/03/18 13:37:10 by marshaky         ###   ########.fr       */
+/*   Updated: 2026/04/17 19:07:45 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int	main(int argc, char **argv)
 		printf("Error\nInvalid file extension. Expected .cub\n");
 		return (ERROR);
 	}
-	ft_memset(&d, 0, sizeof(d));
-	if (app_init(&d) != 0)
+	if (data_init(&d) != 0)
 		return (ERROR);
 	if (parse_cub_file(&d.map, argv[1]) != 0)
 		return (clean_exit(&d, ERROR));
-	camera_init(&d.map);
+	if (graphics_init(&d) != 0)
+		return (clean_exit(&d, ERROR));
 	if (load_textures(&d) != 0)
 		return (clean_exit(&d, ERROR));
 	register_hooks(&d);
