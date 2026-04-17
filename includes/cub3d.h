@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:14:38 by aramarak          #+#    #+#             */
-/*   Updated: 2026/04/17 19:50:47 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/04/17 19:58:16 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -425,5 +425,11 @@ void			free_split(char **arr);
 /*     src/parser            parser_validate.c                                */
 /* ************************************************************************** */
 int				validate_map(t_map *map);
+
+/* ************************************************************************** */
+/*     src/parser               parser_color.c                                */
+/* ************************************************************************** */
+int				parse_rgb_value(char *raw, int *value);
+int				parse_color(char *line, int *color);
 
 #endif	//CUB3D_H

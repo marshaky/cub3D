@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:21:39 by marshaky          #+#    #+#             */
-/*   Updated: 2026/04/17 19:43:10 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/04/17 19:56:56 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,39 +48,6 @@ int	is_map_line(char *line)
 		i++;
 	}
 	return (i > 0);
-}
-
-static int	parse_color(char *line, int *color)
-{
-	char	**rgb;
-	char	*trimmed;
-	int		vals[3];
-	int		i;
-
-	line++;
-	while (*line && ft_isspace(*line))
-		line++;
-	rgb = ft_split(line, ',');
-	if (!rgb || ft_arrlen(rgb) != 3)
-		return (free_split(rgb), printf(COL_ERR), ERROR);
-	i = 0;
-	while (i < 3)
-	{
-		trimmed = ft_strtrim(rgb[i], " \n\t");
-		if (!trimmed || !is_str_digit(trimmed))
-			return (free(trimmed), free_split(rgb), printf(COL_ERR), ERROR);
-
-		vals[i] = ft_atoi(trimmed);
-		free(trimmed);
-
-		if (vals[i] < 0 || vals[i] > 255)
-			return (free_split(rgb), printf(COL_VAL_ERR), ERROR);
-
-		i++;
-	}
-	free_split(rgb);
-	*color = (vals[0] << 16) | (vals[1] << 8) | vals[2];
-	return (0);
 }
 
 int	parse_config_line(t_map *map, char *line)

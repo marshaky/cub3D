@@ -32,6 +32,7 @@ SRC = \
 	$(LOADER_DIR)/loader.c \
 	$(PARSER_DIR)/parser.c \
 	$(PARSER_DIR)/parser_checkers.c \
+	$(PARSER_DIR)/parser_color.c \
 	$(PARSER_DIR)/parser_player.c \
 	$(PARSER_DIR)/parser_utils.c \
 	$(PARSER_DIR)/parser_validate.c \
