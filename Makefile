@@ -49,7 +49,7 @@ SRC = \
 	$(RENDER_DIR)/render_utils.c \
 	$(RENDER_DIR)/render_walls.c \
 	$(RENDER_DIR)/render.c \
-	$(UTILS_DIR)/error.c \
+	$(UTILS_DIR)/helpers.c \
 	$(UTILS_DIR)/exit.c \
 	$(SRC_DIR)/main.c
 

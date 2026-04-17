@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:21:39 by marshaky          #+#    #+#             */
-/*   Updated: 2026/03/25 20:08:12 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/04/17 19:43:10 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,29 +53,33 @@ int	is_map_line(char *line)
 static int	parse_color(char *line, int *color)
 {
 	char	**rgb;
-	int		r;
-	int		g;
-	int		b;
+	char	*trimmed;
+	int		vals[3];
 	int		i;
 
 	line++;
-	while (*line == ' ')
+	while (*line && ft_isspace(*line))
 		line++;
 	rgb = ft_split(line, ',');
-	if (!rgb)
-		return (ERROR);
-	i = 0;
-	while (rgb[i])
-		i++;
-	if (i != 3)
+	if (!rgb || ft_arrlen(rgb) != 3)
 		return (free_split(rgb), printf(COL_ERR), ERROR);
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
+	i = 0;
+	while (i < 3)
+	{
+		trimmed = ft_strtrim(rgb[i], " \n\t");
+		if (!trimmed || !is_str_digit(trimmed))
+			return (free(trimmed), free_split(rgb), printf(COL_ERR), ERROR);
+
+		vals[i] = ft_atoi(trimmed);
+		free(trimmed);
+
+		if (vals[i] < 0 || vals[i] > 255)
+			return (free_split(rgb), printf(COL_VAL_ERR), ERROR);
+
+		i++;
+	}
 	free_split(rgb);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (printf(COL_VAL_ERR), ERROR);
-	*color = (r << 16) | (g << 8) | b;
+	*color = (vals[0] << 16) | (vals[1] << 8) | vals[2];
 	return (0);
 }
 
