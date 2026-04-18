@@ -1,22 +1,72 @@
-# 42YEREVAN_cube3d
+*This project has been created as part of the 42 curriculum by marshaky, aramarak*
 
-## Description
+# cub3D
 
-cub3d is a 42 School project that introduces students to basic raycasting techniques by building a simple 3D game engine, similar to early games like Wolfenstein 3D. The project involves rendering a 3D view from a 2D map using the MiniLibX graphics library.
+# Description
+This project is a simple ray-caster inspired by Wolfenstein 3D. Its goal is to parse `.cub`
+configuration files, render a textured first-person view using MiniLibX, and support basic
+player movement and rotation. The project is implemented in C and intended to demonstrate
+ray-casting fundamentals and low-level graphics using MiniLibX.
 
-## Features
+## Instructions
 
-- Raycasting engine for 3D rendering
-- Player movement and rotation
-- Wall and floor textures
-- Basic collision detection
-- Map parsing from a configuration file
+### Build
+The project uses the provided `Makefile`. Build with:
 
-## How to Build
+```bash
+make
+```
 
-1. Install dependencies (MiniLibX, etc.).
-2. Clone this repository.
-3. Run `make` in the project directory.
+### Run
+Run the binary with a `.cub` map file:
 
-## Usage
+```bash
+./cub3d maps/example.cub
+```
 
+Notes:
+- Ensure X11 development headers/libraries are installed on Linux.
+- The project links against a local `libft` and `minilibx` included in `libraries/`.
+
+## Resources
+
+- Ray casting overview: https://lodev.org/cgtutor/raycasting.html
+- MiniLibX examples and docs (see `libraries/minilibx-*`)
+- C reference and common algorithms
+
+AI usage disclosure:
+- AI assistance was used only for small, non-core tasks: README drafting and Makefile formatting
+  suggestions. No AI-generated code was copied into the core parsing, rendering, or game logic.
+
+---
+
+## Project goals
+- Understand ray-casting principles
+- Work with MiniLibX
+- Parse `.cub` configuration files
+- Render textures and walls
+- Handle player movement and rotation
+
+## Technologies
+- Language: C
+- Graphics library: MiniLibX
+- Platform: Linux / macOS
+
+## Project structure
+```
+cub3D/
+├── src/
+├── includes/
+├── libraries/
+├── maps/
+├── Makefile
+└── README.md
+```
+
+## Troubleshooting
+- If `make` doesn't rebuild after header changes, ensure object rules depend on headers (see Makefile).
+- For Valgrind "still reachable" reports, free application-owned resources on exit; some MLX allocations
+  are expected.
+
+## How to contribute
+- Open an issue or submit a PR with a focused change and description of the problem solved.

@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+// FIXME: add *d cleaner (used memset)
+// FIXME: invalid texture addres handle (check after create window!!!)
 
 int	clean_exit(t_data *d, int code)
 {
