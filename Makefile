@@ -32,6 +32,7 @@ SRC = \
 	$(LOADER_DIR)/loader.c \
 	$(PARSER_DIR)/parser.c \
 	$(PARSER_DIR)/parser_checkers.c \
+	$(PARSER_DIR)/parser_color.c \
 	$(PARSER_DIR)/parser_player.c \
 	$(PARSER_DIR)/parser_utils.c \
 	$(PARSER_DIR)/parser_validate.c \
@@ -49,7 +50,7 @@ SRC = \
 	$(RENDER_DIR)/render_utils.c \
 	$(RENDER_DIR)/render_walls.c \
 	$(RENDER_DIR)/render.c \
-	$(UTILS_DIR)/error.c \
+	$(UTILS_DIR)/helpers.c \
 	$(UTILS_DIR)/exit.c \
 	$(SRC_DIR)/main.c
 
@@ -72,6 +73,18 @@ else
 	MINILIBX    =	libraries/minilibx-macos
 	MLX_FLAGS   =	-L $(MINILIBX) -framework OpenGL -framework AppKit -lmlx -lm
 endif
+
+VG_MAP			=	maps/test_FC1.cub
+VG_SUPP_FILE	=	valgrind.supp
+VG_USE_SUPP	=	1
+VG_BASE_FLAGS	=	--leak-check=full --show-leak-kinds=all \
+				  --track-origins=yes --num-callers=25
+
+ifeq ($(VG_USE_SUPP),1)
+	VG_SUPP_FLAG	=	--suppressions=$(VG_SUPP_FILE)
+endif
+
+VG_FLAGS		=	$(VG_BASE_FLAGS) $(VG_SUPP_FLAG)
 
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
@@ -101,4 +114,10 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re libft mlx
+vg: all
+	valgrind $(VG_FLAGS) ./$(NAME) $(VG_MAP)
+
+vg-plain: all
+	valgrind $(VG_BASE_FLAGS) ./$(NAME) $(VG_MAP)
+
+.PHONY: all clean fclean re libft mlx vg vg-plain

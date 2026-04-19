@@ -29,18 +29,16 @@ void	camera_init(t_map *map)
 	map->plane_y = map->dir_x * plane_len;
 }
 
-/**
- * Initializes the application window, image buffer, and camera plane.
- * Sets up the MLX window, image, and retrieves the image data address.
- * Returns ERROR if any initialization step fails.
- *
- * @param d Pointer to the main data structure (t_data).
- * @return  0 on success, ERROR on failure.
- */
-int	app_init(t_data *d)
+int	data_init(t_data *d)
 {
+	ft_memset(d, 0, sizeof(*d));
 	d->mlx.w = WINDOW_WIDTH;
 	d->mlx.h = WINDOW_HEIGHT;
+	return (0);
+}
+
+int	graphics_init(t_data *d)
+{
 	d->mlx.mlx = mlx_init();
 	if (!d->mlx.mlx)
 		return (ERROR);

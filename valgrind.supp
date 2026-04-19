@@ -1,0 +1,16 @@
+# Suppress known X11/minilibx false-positive-style warning on Linux.
+# Toggle off at any time with: make vg VG_USE_SUPP=0
+
+{
+   mlx_x11_writev_uninit
+   Memcheck:Param
+   writev(vector[0])
+   fun:writev
+   ...
+   fun:xcb_writev
+   ...
+   fun:_XSend
+   ...
+   fun:mlx_int_wait_first_expose
+   ...
+}

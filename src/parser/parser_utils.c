@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:21:39 by marshaky          #+#    #+#             */
-/*   Updated: 2026/03/25 20:08:12 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/04/17 19:56:56 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,35 +48,6 @@ int	is_map_line(char *line)
 		i++;
 	}
 	return (i > 0);
-}
-
-static int	parse_color(char *line, int *color)
-{
-	char	**rgb;
-	int		r;
-	int		g;
-	int		b;
-	int		i;
-
-	line++;
-	while (*line == ' ')
-		line++;
-	rgb = ft_split(line, ',');
-	if (!rgb)
-		return (ERROR);
-	i = 0;
-	while (rgb[i])
-		i++;
-	if (i != 3)
-		return (free_split(rgb), printf(COL_ERR), ERROR);
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
-	free_split(rgb);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (printf(COL_VAL_ERR), ERROR);
-	*color = (r << 16) | (g << 8) | b;
-	return (0);
 }
 
 int	parse_config_line(t_map *map, char *line)
