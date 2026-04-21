@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:20:32 by marshaky          #+#    #+#             */
-/*   Updated: 2026/04/01 19:13:36 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/04/21 20:56:19 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,17 @@ static int	finalize_parse(t_map *map, int config_count)
 {
 	if (config_count != 6)
 		return (printf(CONFIG_ERR), ERROR);
+	if (!map->tex_path_no || !map->tex_path_so || !map->tex_path_we
+		|| !map->tex_path_ea)
+		return (printf(CONFIG_ERR), ERROR);
+	if (check_file_readable(map->tex_path_no) != 0)
+		return (printf(OPEN_FILE_ERR, map->tex_path_no), ERROR);
+	if (check_file_readable(map->tex_path_so) != 0)
+		return (printf(OPEN_FILE_ERR, map->tex_path_so), ERROR);
+	if (check_file_readable(map->tex_path_we) != 0)
+		return (printf(OPEN_FILE_ERR, map->tex_path_we), ERROR);
+	if (check_file_readable(map->tex_path_ea) != 0)
+		return (printf(OPEN_FILE_ERR, map->tex_path_ea), ERROR);
 	if (!map->grid)
 		return (printf(MAP_FIND_ERR), ERROR);
 	if (validate_map(map) != 0)

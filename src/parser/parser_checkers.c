@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:58:57 by aramarak          #+#    #+#             */
-/*   Updated: 2026/04/01 19:16:50 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/04/21 20:56:30 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,17 @@ int	is_blank_line(char *line)
 		i++;
 	}
 	return (1);
+}
+
+int	check_file_readable(char *path)
+{
+	int	fd;
+
+	if (!path)
+		return (ERROR);
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (ERROR);
+	close(fd);
+	return (0);
 }

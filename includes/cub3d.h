@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:14:38 by aramarak          #+#    #+#             */
-/*   Updated: 2026/04/19 12:14:39 by root             ###   ########.fr       */
+/*   Updated: 2026/04/21 20:57:31 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,7 +296,7 @@ int				graphics_init(t_data *d);
 void			camera_init(t_map *map);
 
 /* ************************************************************************** */
-/*     src/loader            init.c                                           */
+/*     src/loader          loader.c                                           */
 /* ************************************************************************** */
 int				load_textures(t_data *d);
 int				load_texture(t_data *d, t_tex *tex, char *path);
@@ -407,6 +407,7 @@ int				parse_player_position(t_map *map);
 /* ************************************************************************** */
 int				is_spawn_char(char c);
 int				is_blank_line(char *line);
+int				check_file_readable(char *path);
 
 /* ************************************************************************** */
 /*     src/parser            parser.c                                         */
