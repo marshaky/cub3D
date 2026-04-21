@@ -34,6 +34,8 @@ int	data_init(t_data *d)
 	ft_memset(d, 0, sizeof(*d));
 	d->mlx.w = WINDOW_WIDTH;
 	d->mlx.h = WINDOW_HEIGHT;
+	d->map.floor_color = -1;
+	d->map.ceil_color = -1;
 	return (0);
 }
 

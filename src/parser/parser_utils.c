@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:21:39 by marshaky          #+#    #+#             */
-/*   Updated: 2026/04/17 19:56:56 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/04/21 20:43:07 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ int	parse_config_line(t_map *map, char *line)
 		map->tex_path_we = ft_strtrim(line + 3, " \n");
 	else if (ft_strncmp(line, "EA ", 3) == 0 && !map->tex_path_ea)
 		map->tex_path_ea = ft_strtrim(line + 3, " \n");
-	else if (ft_strncmp(line, "F ", 2) == 0 && map->floor_color == 0)
+	else if (ft_strncmp(line, "F ", 2) == 0 && map->floor_color == -1)
 	{
 		if (parse_color(line, &map->floor_color) != 0)
 			return (ERROR);
 	}
-	else if (ft_strncmp(line, "C ", 2) == 0 && map->ceil_color == 0)
+	else if (ft_strncmp(line, "C ", 2) == 0 && map->ceil_color == -1)
 	{
 		if (parse_color(line, &map->ceil_color) != 0)
 			return (ERROR);
